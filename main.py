@@ -4,5 +4,7 @@ import pandas as pd
 tickers = ['AAPL', 'MSFT', 'NVDA', 'AMZN', 'GOOGL', 'META', 'TSLA', 'JPM', 'V', 'NFLX']
 close = yf.download(tickers, period = '3y')['Close']
 
-print(close.shape)
-print(close.head())
+monthly_prices = close.resample('ME').last()
+monthly_returns = monthly_prices.pct_change().dropna()
+
+print(monthly_returns)
