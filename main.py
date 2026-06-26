@@ -31,7 +31,7 @@ def max_drawdown(portfolio_values):
     for value in portfolio_values: 
         if value > peak:
             peak = value
-        drawdown = round((value - peak) / peak, 2)
+        drawdown = (value - peak) / peak
         if drawdown < worst_drawdown:
             worst_drawdown = drawdown
 
@@ -40,4 +40,22 @@ def max_drawdown(portfolio_values):
 cum_strategy = (1 + strategy_returns.dropna()).cumprod()
 cum_benchmark = (1 + monthly_returns.mean(axis = 1).dropna()).cumprod()
 
+total_return_strategy = cum_strategy.iloc[-1] - 1
+total_return_benchmark = cum_benchmark.iloc[-1] - 1
 
+annualised_return_strategy = (cum_strategy.iloc[-1] ** (1 / 3)) - 1
+annualised_return_benchmark = (cum_benchmark.iloc[-1] ** (1 / 3)) - 1
+
+sharpe_strategy = sharpe_ratio(strategy_returns.dropna())
+sharpe_benchmark = sharpe_ratio(monthly_returns.mean(axis = 1).dropna())
+
+max_drawdown_strategy = max_drawdown(cum_strategy)
+max_drawdown_benchmark = max_drawdown(cum_benchmark)
+
+table = pd.DataFrame({
+    'Metric': ['Total Return', 'Annualised Return', 'Sharpe Ratio', 'Max Drawdown'],
+    'Strategy': [total_return_strategy, annualised_return_strategy, sharpe_strategy, max_drawdown_strategy],
+    'Benchmark': [total_return_benchmark, annualised_return_benchmark, sharpe_benchmark, max_drawdown_benchmark]
+})
+
+print(table)
