@@ -13,4 +13,4 @@ ranks = momentum.rank(axis = 1, ascending = False)
 signal = ranks.shift(1)
 top3 = signal <= 3
 
-print(top3)
+strategy_returns = (top3 * monthly_returns).mean(axis = 1)
