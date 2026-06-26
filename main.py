@@ -8,3 +8,9 @@ monthly_prices = close.resample('ME').last()
 monthly_returns = monthly_prices.pct_change().dropna()
 
 momentum = monthly_prices.pct_change(12)
+ranks = momentum.rank(axis = 1, ascending = False)
+
+signal = ranks.shift(1)
+top3 = signal <= 3
+
+print(top3)
