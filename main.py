@@ -7,7 +7,7 @@ close = yf.download(tickers, period = '3y')['Close']
 monthly_prices = close.resample('ME').last()
 monthly_returns = monthly_prices.pct_change().dropna()
 
-momentum = monthly_prices.pct_change(12)
+momentum = monthly_prices.pct_change(12).shift(1)
 ranks = momentum.rank(axis = 1, ascending = False)
 
 signal = ranks.shift(1)
@@ -38,6 +38,6 @@ def max_drawdown(portfolio_values):
     return worst_drawdown
 
 cum_strategy = (1 + strategy_returns.dropna()).cumprod()
+cum_benchmark = (1 + monthly_returns.mean(axis = 1).dropna()).cumprod()
 
-print(f'Sharpe Ratio: {round(sharpe_ratio(strategy_returns), 2)}')
-print(f'Max Drawdown: {max_drawdown(cum_strategy)}')
+
