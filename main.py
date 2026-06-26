@@ -14,3 +14,8 @@ signal = ranks.shift(1)
 top3 = signal <= 3
 
 strategy_returns = (top3 * monthly_returns).mean(axis = 1)
+
+turnover = top3.astype(float).diff().abs().sum(axis=1) / 2
+transaction_costs = turnover * 0.001
+strategy_returns = strategy_returns - transaction_costs
+
