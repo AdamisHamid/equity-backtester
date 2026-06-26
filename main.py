@@ -7,4 +7,4 @@ close = yf.download(tickers, period = '3y')['Close']
 monthly_prices = close.resample('ME').last()
 monthly_returns = monthly_prices.pct_change().dropna()
 
-print(monthly_returns)
+momentum = monthly_prices.pct_change(12)
