@@ -15,7 +15,29 @@ top3 = signal <= 3
 
 strategy_returns = (top3 * monthly_returns).mean(axis = 1)
 
-turnover = top3.astype(float).diff().abs().sum(axis=1) / 2
+turnover = top3.astype(float).diff().abs().sum(axis = 1) / 2
 transaction_costs = turnover * 0.001
 strategy_returns = strategy_returns - transaction_costs
 
+def sharpe_ratio(returns):
+    return returns.mean() / returns.std() * (12 ** 0.5)
+
+
+def max_drawdown(portfolio_values):
+    portfolio_values = list(portfolio_values)
+    peak = portfolio_values[0]
+    worst_drawdown = 0
+    
+    for value in portfolio_values: 
+        if value > peak:
+            peak = value
+        drawdown = round((value - peak) / peak, 2)
+        if drawdown < worst_drawdown:
+            worst_drawdown = drawdown
+
+    return worst_drawdown
+
+cum_strategy = (1 + strategy_returns.dropna()).cumprod()
+
+print(f'Sharpe Ratio: {round(sharpe_ratio(strategy_returns), 2)}')
+print(f'Max Drawdown: {max_drawdown(cum_strategy)}')
