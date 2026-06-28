@@ -1,5 +1,6 @@
 import yfinance as yf
 import pandas as pd
+import matplotlib.pyplot as plt
 
 tickers = ['AAPL', 'MSFT', 'NVDA', 'AMZN', 'GOOGL', 'META', 'TSLA', 'JPM', 'V', 'NFLX']
 close = yf.download(tickers, period = '3y')['Close']
@@ -59,3 +60,17 @@ table = pd.DataFrame({
 })
 
 print(table)
+
+plt.figure(figsize=(10, 6))
+plt.plot(cum_strategy, label = 'Strategy', linewidth=1.8)
+plt.plot(cum_benchmark, label = 'Benchmark', linewidth=1.8)
+
+plt.title('Strategy vs Benchmark Cumulative Performance', fontsize=14)
+plt.xlabel('Date', fontsize=12)
+plt.ylabel('Cumulative Return', fontsize=12)
+
+plt.legend(fontsize=10)
+plt.grid(True, alpha=0.3)
+
+plt.tight_layout()
+plt.show()
