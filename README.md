@@ -21,7 +21,7 @@ AAPL, MSFT, NVDA, AMZN, GOOGL, META, TSLA, JPM, V, NFLX (Apple, Microsoft, Nvidi
 | Sharpe Ratio       | 0.61     | 1.41      |
 | Max Drawdown       | -3.9%    | -13.2%    |
 
-## Performance Chart as of May 2026
+## Performance Chart
 
 ![Performance](performance.png)
 
