@@ -12,7 +12,7 @@ The signal is shifted by one month to avoid lookahead bias, so last month's mome
 
 AAPL, MSFT, NVDA, AMZN, GOOGL, META, TSLA, JPM, V, NFLX (Apple, Microsoft, Nvidia, Amazon, Google, Meta, Tesla, JP Morgan, Visa, Netflix)
 
-## Results (2023–2026)
+## Results (May 2023 – May 2026)
 
 | Metric             | Strategy | Benchmark |
 |--------------------|----------|-----------|
@@ -21,7 +21,7 @@ AAPL, MSFT, NVDA, AMZN, GOOGL, META, TSLA, JPM, V, NFLX (Apple, Microsoft, Nvidi
 | Sharpe Ratio       | 0.61     | 1.41      |
 | Max Drawdown       | -3.9%    | -13.2%    |
 
-## Performance Chart
+## Performance Chart as of May 2026
 
 ![Performance](performance.png)
 
@@ -49,6 +49,6 @@ python main.py
 
 ## What's next (v1)
 
-- Add value and low volatility factors alongside momentum
-- Walk-forward testing to avoid overfitting
-- More rigorous transaction cost modelling
+- Expand universe from 10 to 20 stocks
+- Walk-forward testing to validate the strategy out-of-sample
+- Add low volatility as a second signal alongside momentum
