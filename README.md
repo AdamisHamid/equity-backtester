@@ -12,14 +12,14 @@ The signal is shifted by one month to avoid lookahead bias, so last month's mome
 
 AAPL, MSFT, NVDA, AMZN, GOOGL, META, TSLA, JPM, V, NFLX (Apple, Microsoft, Nvidia, Amazon, Google, Meta, Tesla, JP Morgan, Visa, Netflix)
 
-## Results (May 2023 – May 2026)
+## Results (June 2023 – June 2026)
 
 | Metric             | Strategy | Benchmark |
 |--------------------|----------|-----------|
-| Total Return       | 10.3%    | 108.7%    |
-| Annualised Return  | 3.3%     | 27.8%     |
-| Sharpe Ratio       | 0.61     | 1.41      |
-| Max Drawdown       | -3.9%    | -13.2%    |
+| Total Return       | 15.7%    | 111.9%    |
+| Annualised Return  | 5.0%     | 28.5%     |
+| Sharpe Ratio       | 0.86     | 1.46      |
+| Max Drawdown       | -5.4%    | -13.2%    |
 
 ## Performance Chart
 
@@ -28,18 +28,18 @@ AAPL, MSFT, NVDA, AMZN, GOOGL, META, TSLA, JPM, V, NFLX (Apple, Microsoft, Nvidi
 ## Observations
 
 The momentum strategy significantly underperformed the equal-weight 
-benchmark over the 3-year period (10.3% vs 108.7% total return). 
-However, the strategy had a considerably lower max drawdown (-3.9% 
+benchmark over the 3-year period (15.7% vs 111.9% total return). 
+However, the strategy had a considerably lower max drawdown (-5.4% 
 vs -13.2%), suggesting it was more conservative in avoiding large losses.
 
-The low Sharpe ratio (0.61) indicates the strategy did not generate 
-sufficient return relative to its risk. This is likely due to the 
-limited universe of 10 stocks and the simple 12-month momentum signal 
-without additional filters.
+The Sharpe ratio (0.86) indicates the strategy generated modest 
+risk-adjusted returns but still fell short of the benchmark (1.46). 
+This is likely due to the limited universe of 10 stocks and the simple 
+12-month momentum signal without additional filters.
 
-v1 will address this by adding value and low volatility factors 
-alongside momentum and implementing walk-forward testing to reduce 
-overfitting.
+v1 will address this by adding walk-forward testing to validate the 
+strategy out-of-sample and low volatility as a second signal alongside 
+momentum.
 
 ## How to run
 
