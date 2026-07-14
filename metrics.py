@@ -17,7 +17,7 @@ def max_drawdown(portfolio_values):
  
     return worst_drawdown
  
-def performance_table(strategy_returns, benchmark_returns, years=3):
+def performance_table(strategy_returns, benchmark_returns, years = 5):
     cum_strategy  = (1 + strategy_returns.dropna()).cumprod()
     cum_benchmark = (1 + benchmark_returns.dropna()).cumprod()
  

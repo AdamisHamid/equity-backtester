@@ -1,6 +1,6 @@
 import yfinance as yf
  
-def get_prices(tickers, period = '3y'):
+def get_prices(tickers, period = '5y'):
     close = yf.download(tickers, period = period)['Close']
 
     monthly_prices = close.resample('ME').last()
