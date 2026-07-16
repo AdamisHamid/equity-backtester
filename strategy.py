@@ -9,7 +9,7 @@ def run_momentum(monthly_prices, monthly_returns, top_n = 3, cost = 0.001):
  
     turnover = top_n_stocks.astype(float).diff().abs().sum(axis = 1) / 2
     transaction_costs = turnover * cost
-    strategy_returns = strategy_returns - transaction_costs
+    strategy_returns -= transaction_costs
  
     return strategy_returns
 
@@ -22,7 +22,7 @@ def walk_forward_test(monthly_prices, monthly_returns, train_window = 24, test_w
         test_slice = monthly_returns.iloc[start + train_window : start + train_window + test_window]
 
         momentum = training_slice.pct_change(12).shift(1)
-        ranks = momentum.rank(axis=1, ascending = False)
+        ranks = momentum.rank(axis = 1, ascending = False)
         latest_rank = ranks.iloc[-1]
         top_n_stocks = latest_rank <= top_n
 
@@ -34,7 +34,7 @@ def walk_forward_test(monthly_prices, monthly_returns, train_window = 24, test_w
 
         all_returns.append(strategy_returns)
         start += test_window
-        
+
     combined = pd.concat(all_returns)
 
     return combined
