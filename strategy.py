@@ -38,3 +38,16 @@ def walk_forward_test(monthly_prices, monthly_returns, train_window = 24, test_w
     combined = pd.concat(all_returns)
 
     return combined
+
+def run_low_vol(monthly_returns, top_n = 3, cost = 0.001):
+    volatility = monthly_returns.rolling(3).std().shift(1)
+    ranks = volatility.rank(axis = 1, ascending = True)
+    top_n_stocks = ranks <= top_n
+
+    strategy_returns = (top_n_stocks * monthly_returns).mean(axis = 1)
+
+    turnover = top_n_stocks.astype(float).diff().abs().sum(axis = 1) / 2
+    transaction_costs = turnover * cost
+    strategy_returns -= transaction_costs
+
+    return strategy_returns
