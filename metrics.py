@@ -17,7 +17,10 @@ def max_drawdown(portfolio_values):
  
     return worst_drawdown
  
-def performance_table(strategy_returns, benchmark_returns, wf_returns = None, years = 5):
+def performance_table(strategy_returns, benchmark_returns, wf_returns = None, vol_returns = None, years = 5):
+    cum_wf = None
+    cum_vol = None
+    
     cum_strategy  = (1 + strategy_returns.dropna()).cumprod()
     cum_benchmark = (1 + benchmark_returns.dropna()).cumprod()
  
@@ -40,16 +43,26 @@ def performance_table(strategy_returns, benchmark_returns, wf_returns = None, ye
     })
 
     if wf_returns is not None:
-         cum_wf = (1 + wf_returns.dropna()).cumprod()
+        cum_wf = (1 + wf_returns.dropna()).cumprod()
  
-         total_return_wf = cum_wf.iloc[-1] - 1
-         annualised_return_wf = (cum_wf.iloc[-1] ** (1 / years)) - 1
+        total_return_wf = cum_wf.iloc[-1] - 1
+        annualised_return_wf = (cum_wf.iloc[-1] ** (1 / years)) - 1
 
-         sharpe_wf = sharpe_ratio(wf_returns.dropna())
-         max_drawdown_wf = max_drawdown(cum_wf)
+        sharpe_wf = sharpe_ratio(wf_returns.dropna())
+        max_drawdown_wf = max_drawdown(cum_wf)
  
-         table['Walk-Forward'] = [total_return_wf, annualised_return_wf, sharpe_wf, max_drawdown_wf]
+        table['Walk-Forward'] = [total_return_wf, annualised_return_wf, sharpe_wf, max_drawdown_wf]
 
-         return table, cum_strategy, cum_benchmark, cum_wf
+    if vol_returns is not None:
+        cum_vol = (1 + vol_returns.dropna()).cumprod()
 
-    return table, cum_strategy, cum_benchmark
+        total_return_vol = cum_vol.iloc[-1] - 1
+        annualised_return_vol = (cum_vol.iloc[-1] ** (1 / years)) - 1
+
+        sharpe_vol = sharpe_ratio(vol_returns.dropna())
+        max_drawdown_vol = max_drawdown(cum_vol)
+
+        table['Volatility'] = [total_return_vol, annualised_return_vol, sharpe_vol, max_drawdown_vol]
+
+
+    return table, cum_strategy, cum_benchmark, cum_wf, cum_vol

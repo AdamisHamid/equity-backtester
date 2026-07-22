@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 import os
  
  
-def plot_performance(cum_benchmark, cum_strategy = None, cum_wf = None, strategy_label = 'Strategy', title = 'Strategy vs Benchmark Cumulative Performance', filename = 'performance.png'):
+def plot_performance(cum_benchmark, cum_strategy = None, cum_wf = None, cum_vol = None, strategy_label = 'Strategy', title = 'Strategy vs Benchmark Cumulative Performance', filename = 'performance.png'):
     fig, ax = plt.subplots(figsize = (10, 6))
  
     ax.plot(cum_benchmark, label = 'Benchmark', linewidth = 1.8)
@@ -12,6 +12,9 @@ def plot_performance(cum_benchmark, cum_strategy = None, cum_wf = None, strategy
  
     if cum_wf is not None:
         ax.plot(cum_wf, label = 'Walk-Forward', linewidth = 1.8)
+ 
+    if cum_vol is not None:
+        ax.plot(cum_vol, label = 'Low Volatility', linewidth = 1.8)
  
     ax.set_title(title, fontsize = 14)
     ax.set_xlabel('Date', fontsize = 12)
